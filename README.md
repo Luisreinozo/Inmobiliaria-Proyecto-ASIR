@@ -1,5 +1,5 @@
 # Inmobiliaria-Proyecto-ASIR
-repositorio de scripts del proyecto de ASIR, la intensión es diseñar e implementar una infraestructura de red empresarial que conecte de forma segura las dos oficinas (A Coruña y Orense) de Inmobiliaria Centro mediante una VPN, garantizando la disponibilidad, integridad y seguridad de la información, así como el acceso remoto a los recursos corporativos por parte de la dirección. Este proyecto integra de forma transversal los conocimientos adquiridos en los módulos del ciclo formativo de ASIR:
+repositorio de scripts del proyecto de ASIR, la intensión es diseñar e implementar una infraestructura de red empresarial que conecte de forma segura las dos oficinas (A Coruña y Orense) de Inmobiliaria Centro y desde el portatil del jefe desde cualquier ubicación mediante una VPN, garantizando la disponibilidad, integridad y seguridad de la información, así como el acceso remoto a los recursos corporativos por parte de la dirección. Este proyecto integra de forma transversal los conocimientos adquiridos en los módulos del ciclo formativo de ASIR:
 
 - **ISO**: instalación y configuración de servidores Ubuntu y puestos de trabajo con Windows.
 - **SRI**: despliegue de servicios DNS y DHCP.
