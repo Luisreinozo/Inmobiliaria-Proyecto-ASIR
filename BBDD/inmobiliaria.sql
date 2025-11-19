@@ -11,10 +11,10 @@ USE inmobiliaria;
 DROP TABLE IF EXISTS ccaa;
 CREATE TABLE ccaa (
   id_ccaa   SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  comunidad VARCHAR(50)       NOT NULL,
+  comunidad VARCHAR(50)       NOT NULL,    
   PRIMARY KEY (id_ccaa),
   UNIQUE KEY ccaa_comunidad_UN (comunidad)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 2) Provincias
@@ -30,7 +30,7 @@ CREATE TABLE provincias (
     FOREIGN KEY (ccaa_id_ccaa)
     REFERENCES ccaa (id_ccaa)
     ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 3) Localidades
@@ -46,7 +46,7 @@ CREATE TABLE localidades (
     FOREIGN KEY (provincias_id_provincia)
     REFERENCES provincias (id_provincia)
     ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 4) Operaciones (venta, alquiler, etc.)
@@ -57,7 +57,7 @@ CREATE TABLE operaciones (
   operacion      VARCHAR(20)       NOT NULL,
   PRIMARY KEY (id_operaciones),
   UNIQUE KEY operaciones_operacion_UN (operacion)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 5) Tipos de inmueble (normalización de inmuebles.tipo)
@@ -68,7 +68,7 @@ CREATE TABLE tipos_inmueble (
   tipo    VARCHAR(50)       NOT NULL,
   PRIMARY KEY (id_tipo),
   UNIQUE KEY tipos_inmueble_tipo_UN (tipo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 6) Empleados (negocio, sin tablas de AD)
@@ -83,15 +83,13 @@ CREATE TABLE empleados (
   telefono    VARCHAR(20)       NOT NULL,
   email       VARCHAR(190)      NOT NULL,
   cargo       VARCHAR(50)       NULL,
-  -- auditoría
   fecha_creacion     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                   ON UPDATE CURRENT_TIMESTAMP,
+  fecha_modificacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_empleado),
   UNIQUE KEY empleados_nif_UN    (nif),
   UNIQUE KEY empleados_tel_UN    (telefono),
   UNIQUE KEY empleados_email_UN  (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 7) Clientes
@@ -108,10 +106,8 @@ CREATE TABLE clientes (
   direccion                  VARCHAR(100)      NOT NULL,
   localidades_id_localidades SMALLINT UNSIGNED NOT NULL,
   fecha_alta                 DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  -- auditoría
   fecha_creacion             DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion         DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                                 ON UPDATE CURRENT_TIMESTAMP,
+  fecha_modificacion         DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   usuario_creacion           SMALLINT UNSIGNED NOT NULL,
   usuario_modificacion       SMALLINT UNSIGNED NULL,
   PRIMARY KEY (id_cliente),
@@ -130,7 +126,7 @@ CREATE TABLE clientes (
     FOREIGN KEY (usuario_modificacion)
     REFERENCES empleados (id_empleado)
     ON DELETE SET NULL ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 8) Inmuebles
@@ -150,14 +146,11 @@ CREATE TABLE inmuebles (
   ascensor                   TINYINT(1)        NULL,
   trastero                   TINYINT(1)        NULL,
   publicado                  TINYINT(1)        NOT NULL DEFAULT 0
-                             COMMENT '1=Visible en la web, 0=Oculto/Borrador',
   clientes_id_propietario    INT UNSIGNED      NOT NULL,
   localidades_id_localidades SMALLINT UNSIGNED NOT NULL,
   operaciones_id_operaciones SMALLINT UNSIGNED NOT NULL,
-  -- auditoría
   fecha_creacion             DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion         DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                                  ON UPDATE CURRENT_TIMESTAMP,
+  fecha_modificacion         DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   usuario_creacion           SMALLINT UNSIGNED NOT NULL,
   usuario_modificacion       SMALLINT UNSIGNED NULL,
   PRIMARY KEY (id_inmueble),
@@ -185,7 +178,7 @@ CREATE TABLE inmuebles (
     FOREIGN KEY (usuario_modificacion)
     REFERENCES empleados (id_empleado)
     ON DELETE SET NULL ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 9) Ventas
@@ -197,10 +190,8 @@ CREATE TABLE ventas (
   clientes_id_comprador INT UNSIGNED      NOT NULL,
   empleados_id_empleado SMALLINT UNSIGNED NOT NULL,
   precio_total          DECIMAL(12,2)     NOT NULL,
-  -- auditoría
   fecha_creacion        DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion    DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                             ON UPDATE CURRENT_TIMESTAMP,
+  fecha_modificacion    DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   usuario_creacion      SMALLINT UNSIGNED NOT NULL,
   usuario_modificacion  SMALLINT UNSIGNED NULL,
   PRIMARY KEY (id_venta),
@@ -220,10 +211,10 @@ CREATE TABLE ventas (
     FOREIGN KEY (usuario_modificacion)
     REFERENCES empleados (id_empleado)
     ON DELETE SET NULL ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
--- 10) Detalle_venta (N:M ventas <-> inmuebles)
+-- 10) Detalle_venta 
 -- =========================================================
 DROP TABLE IF EXISTS detalle_venta;
 CREATE TABLE detalle_venta (
@@ -239,7 +230,7 @@ CREATE TABLE detalle_venta (
     FOREIGN KEY (inmuebles_id_inmueble)
     REFERENCES inmuebles (id_inmueble)
     ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
 -- 11) Fotos de inmuebles
@@ -250,10 +241,8 @@ CREATE TABLE fotos (
   inmuebles_id_inmueble INT UNSIGNED      NOT NULL,
   ruta                  VARCHAR(512)      NOT NULL,
   orden                 INT UNSIGNED      NOT NULL DEFAULT 1,
-  -- auditoría
   fecha_creacion        DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion    DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                             ON UPDATE CURRENT_TIMESTAMP,
+  fecha_modificacion    DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
   usuario_creacion      SMALLINT UNSIGNED NOT NULL,
   usuario_modificacion  SMALLINT UNSIGNED NULL,
   PRIMARY KEY (id_fotos),
@@ -270,10 +259,10 @@ CREATE TABLE fotos (
     FOREIGN KEY (usuario_modificacion)
     REFERENCES empleados (id_empleado)
     ON DELETE SET NULL ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
 -- =========================================================
--- 12) Tareas para integración con Nextcloud (webopción2)
+-- 12) Tareas para integración con Nextcloud
 -- =========================================================
 DROP TABLE IF EXISTS tareas_nextcloud;
 CREATE TABLE tareas_nextcloud (
@@ -289,5 +278,5 @@ CREATE TABLE tareas_nextcloud (
     FOREIGN KEY (id_inmueble)
     REFERENCES inmuebles (id_inmueble)
     ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) 
 
