@@ -1,0 +1,27 @@
+
+# dhcpd.conf tiene menos comentario que el de Coruña
+
+option domain-name "inmobiliaria.local";
+option domain-name-servers 10.0.4.21, 10.0.2.21;
+
+default-lease-time 3600;
+max-lease-time 7200;
+
+ddns-update-style interim;
+update-static-leases on;
+
+authoritative;
+
+log-facility local7;
+
+subnet 10.0.4.0 netmask 255.255.255.0 {
+    range 10.0.4.100 10.0.4.150;
+    option routers 10.0.4.2;
+    option subnet-mask 255.255.255.0;
+    option domain-name-servers 10.0.4.21, 10.0.2.21;
+    option domain-search "inmobiliaria.local";
+    ddns-domainname "inmobiliaria.local.";
+    ddns-rev-domainname "4.0.10.in-addr.arpa.";
+    default-lease-time 86400;
+    max-lease-time 172800;
+}
