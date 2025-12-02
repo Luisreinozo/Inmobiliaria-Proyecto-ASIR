@@ -16,7 +16,7 @@ mysqldump
   # es para las procedimientos almacenados, funciones y tareas automatizadas de MySQL que no tengo en la BD pero si luego se incorporan ya está contemplado
   --routines --events \
   "$DB_NAME" \
-  | zip > "$BACKUP_DIR/${DB_NAME}_${DATE}.sql.gz"
+  | gzip > "$BACKUP_DIR/${DB_NAME}_${DATE}.sql.gz"
 
 # Rotación de los backups, borrando ficheros con más de 30 días
 find "$BACKUP_DIR" -type f -name "${DB_NAME}_*.sql.gz" -mtime +30 -delete
