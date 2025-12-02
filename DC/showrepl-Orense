@@ -1,0 +1,90 @@
+root@dcor:~# samba-tool drs showrepl
+Default-First-Site-Name\DCOR
+DSA Options: 0x00000001
+DSA object GUID: 93286f29-b10d-48f5-bb08-c3b7aedc751d
+DSA invocationId: f59010c0-c93f-430d-82e5-f77dda671c3c
+
+==== INBOUND NEIGHBORS ====
+
+CN=Configuration,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ Tue Dec  2 15:37:11 2025 CET was successful
+                0 consecutive failure(s).
+                Last success @ Tue Dec  2 15:37:11 2025 CET
+
+DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ Tue Dec  2 15:37:11 2025 CET was successful
+                0 consecutive failure(s).
+                Last success @ Tue Dec  2 15:37:11 2025 CET
+
+CN=Schema,CN=Configuration,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ Tue Dec  2 15:37:11 2025 CET was successful
+                0 consecutive failure(s).
+                Last success @ Tue Dec  2 15:37:11 2025 CET
+
+DC=DomainDnsZones,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ Tue Dec  2 15:37:10 2025 CET was successful
+                0 consecutive failure(s).
+                Last success @ Tue Dec  2 15:37:10 2025 CET
+
+DC=ForestDnsZones,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ Tue Dec  2 15:37:11 2025 CET was successful
+                0 consecutive failure(s).
+                Last success @ Tue Dec  2 15:37:11 2025 CET
+
+==== OUTBOUND NEIGHBORS ====
+
+CN=Configuration,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ NTTIME(0) was successful
+                0 consecutive failure(s).
+                Last success @ NTTIME(0)
+
+DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ NTTIME(0) was successful
+                0 consecutive failure(s).
+                Last success @ NTTIME(0)
+
+CN=Schema,CN=Configuration,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ NTTIME(0) was successful
+                0 consecutive failure(s).
+                Last success @ NTTIME(0)
+
+DC=DomainDnsZones,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ NTTIME(0) was successful
+                0 consecutive failure(s).
+                Last success @ NTTIME(0)
+
+DC=ForestDnsZones,DC=inmobiliaria,DC=local
+        Default-First-Site-Name\DCAD via RPC
+                DSA object GUID: 2d72e5d9-61da-4fb7-972f-cfc0ce9c9770
+                Last attempt @ NTTIME(0) was successful
+                0 consecutive failure(s).
+                Last success @ NTTIME(0)
+
+==== KCC CONNECTION OBJECTS ====
+
+Connection --
+        Connection name: 5c72aff1-7ee1-4ee5-aec7-7da71ce8624e
+        Enabled        : TRUE
+        Server DNS name : dcad.inmobiliaria.local
+        Server DN name  : CN=NTDS Settings,CN=DCAD,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=inmobiliaria,DC=local
+                TransportType: RPC
+                options: 0x00000001
+Warning: No NC replicated for Connection!
