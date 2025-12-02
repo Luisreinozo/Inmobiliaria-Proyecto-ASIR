@@ -82,7 +82,7 @@ CREATE TABLE empleados (
   nif         VARCHAR(15)       NOT NULL,
   telefono    VARCHAR(20)       NOT NULL,
   email       VARCHAR(190)      NOT NULL,
-  cargo       VARCHAR(50)       NULL,
+  cargo       VARCHAR(50)       NOT NULL,
   fecha_creacion     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   fecha_modificacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_empleado),
