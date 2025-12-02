@@ -1,0 +1,1 @@
+21 11 * * * root /usr/local/sbin/backup_inmobiliaria.sh >/var/log/backup_inmobiliaria.log 2>&1
