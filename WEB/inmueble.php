@@ -102,9 +102,6 @@ $fotos = $stmtFotos->fetchAll();
     <?php endforeach; ?>
 <?php endif; ?>
 
-<h2>Propietario</h2>
-<p><?= htmlspecialchars($inmueble['propietario_nombre'] . ' ' . $inmueble['propietario_apellido1']) ?></p>
-
 <p><a href="index.php">Volver al listado</a></p>
 </body>
 </html>
