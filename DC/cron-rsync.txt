@@ -1,0 +1,3 @@
+*/5 * * * * rsync -XAavz --delete-after --numeric-ids  /var/lib/samba/sysvol/ root@dcor.inmobiliaria.local:/var/lib/samba/sysvol/ >> /var/log/sysvol-replication.log 2>&1
+
+*/7 * * * * rsync -av /var/lib/samba/private/idmap.ldb root@dcor.inmobiliaria.local:/var/lib/samba/private/idmap.ldb >> /var/log/idmap-sync.log 2>&1
