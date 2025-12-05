@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 // worker_nextcloud.php
-// Ejecuta tareas_nextcloud: crea/borrra carpetas en GroupFolder "Inmuebles"
+// Se ejecuta cada 5 desde el servidor Nextcloud, lo dejo en este repositorio porque corresponde a parte de la aplicación web
 
 // Config BBDD
 $dbHost = '10.0.2.22';
