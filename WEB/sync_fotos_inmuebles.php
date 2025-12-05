@@ -1,18 +1,48 @@
 #!/usr/bin/php
 <?php
+// sync_fotos_inmuebles.php
+// Descarga fotos desde Nextcloud a la web y rellena la tabla `fotos`
+// Versión segura: lee credenciales desde archivo protegido
 
-//Este escript se ejecuta cada 10mi desde nextcloud, lo dejo en este repositorio porque es parte de la web
+// Cargar configuración desde archivo protegido
+$configFile = '/var/www/inmoweb/admin/acceso_dmz.conf';
 
-$dbHost = '10.0.2.22';
-$dbName = 'inmobiliaria';
-$dbUser = 'webapp';
-$dbPass = 'Webapp1234.';
+if (!file_exists($configFile)) {
+    fwrite(STDERR, "Error: Archivo de configuración no encontrado: $configFile\n");
+    exit(1);
+}
 
-// Nextcloud WebDAV
-$ncBaseUrl   = 'http://nextcloud.inmobiliaria.local';
-$ncUserLogin = 'Ramon';
-$ncUserId    = '6E089838-1326-4B40-9998-8E8230BC256A';
-$ncPassword  = '84odR-swpgp-zniXK-AE6Mm-z28xB';
+if (!is_readable($configFile)) {
+    fwrite(STDERR, "Error: No se puede leer el archivo de configuración: $configFile\n");
+    exit(1);
+}
+
+$config = parse_ini_file($configFile);
+
+if (!$config) {
+    fwrite(STDERR, "Error: No se pudo parsear la configuración\n");
+    exit(1);
+}
+
+// Validar que existan todas las variables necesarias
+$requiredKeys = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'NC_BASE_URL', 'NC_USER_LOGIN', 'NC_USER_ID', 'NC_PASSWORD'];
+foreach ($requiredKeys as $key) {
+    if (!isset($config[$key])) {
+        fwrite(STDERR, "Error: Falta la variable $key en la configuración\n");
+        exit(1);
+    }
+}
+
+// Asignar variables desde configuración
+$dbHost = $config['DB_HOST'];
+$dbName = $config['DB_NAME'];
+$dbUser = $config['DB_USER'];
+$dbPass = $config['DB_PASS'];
+
+$ncBaseUrl   = $config['NC_BASE_URL'];
+$ncUserLogin = $config['NC_USER_LOGIN'];
+$ncUserId    = $config['NC_USER_ID'];
+$ncPassword  = $config['NC_PASSWORD'];
 
 // Ruta base local donde guardar fotos
 $mediaBaseDir = '/var/www/inmoweb/media/inmuebles';
@@ -32,7 +62,7 @@ try {
     exit(1);
 }
 
-//Obtener inmuebles publicados
+// 1) Obtener inmuebles publicados
 $sqlInm = "
     SELECT id_inmueble
     FROM inmuebles
@@ -49,8 +79,12 @@ foreach ($inmuebles as $row) {
     syncFotosDeInmueble($pdo, $idInmueble, $ncBaseUrl, $ncUserLogin, $ncUserId, $ncPassword, $mediaBaseDir);
 }
 
-//Sincroniza las fotos de un inmueble:
-
+/**
+ * Sincroniza las fotos de un inmueble:
+ * - lista archivos en Nextcloud: Inmuebles/{id_inmueble}/
+ * - descarga a media/inmuebles/{id_inmueble}/
+ * - rellena tabla `fotos`
+ */
 function syncFotosDeInmueble(PDO $pdo, int $idInmueble, string $baseUrl, string $login, string $userId, string $pass, string $mediaBaseDir): void
 {
     $remotePath = "/remote.php/dav/files/{$userId}/Inmuebles/{$idInmueble}/";
@@ -107,7 +141,7 @@ function syncFotosDeInmueble(PDO $pdo, int $idInmueble, string $baseUrl, string 
             VALUES (:id_inmueble, :ruta, :orden, :usuario_creacion)
         ";
         $stmtIns = $pdo->prepare($sqlIns);
-        // usuario_creacion lo dejamos en 1 (sistema) como placeholder?
+        // usuario_creacion lo dejamos en 1 (sistema) como placeholder
         $stmtIns->execute([
             ':id_inmueble'      => $idInmueble,
             ':ruta'             => $rutaRelativa,
@@ -137,15 +171,16 @@ function webdavPropfind(string $url, string $login, string $pass): ?string
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    if ($httpCode !== 207 && $httpCode !== 207) {
+    if ($httpCode !== 207) {
         return null;
     }
 
     return $response;
 }
 
-// Extrae nombres de archivo de la respuesta PROPFIND
- 
+/**
+ * Extrae nombres de archivo de la respuesta PROPFIND
+ */
 function parseDavFileList(string $xml, string $remotePath): array
 {
     $files = [];
