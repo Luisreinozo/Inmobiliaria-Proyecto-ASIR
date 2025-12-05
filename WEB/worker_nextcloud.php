@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-// worker_nextcloud.php
+
 // Se ejecuta cada 5 desde el servidor Nextcloud, lo dejo en este repositorio porque corresponde a parte de la aplicación web
 
 // Config BBDD
