@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-//Este escript se ejecuta desde nextcloud, lo dejo en este repositorio porque es parte de la web
+//Este escript se ejecuta cada 10mi desde nextcloud, lo dejo en este repositorio porque es parte de la web
 
 $dbHost = '10.0.2.22';
 $dbName = 'inmobiliaria';
