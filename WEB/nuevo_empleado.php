@@ -1,4 +1,5 @@
 <?php
+//root@Web:~# cat /var/www/inmoweb/admin/nuevo_empleado.php 
 
 require __DIR__ . '/config.php'; 
 require __DIR__ . '/ldap_empleado.php';
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':nombre_usuario_ad' => $nombreUsuarioAD,
         ]);
 
-        echo '✅ Empleado ' . htmlspecialchars($nombre) . ' creado y mapeado con exito.';
+        echo ' Empleado ' . htmlspecialchars($nombre) . ' creado y mapeado con exito.';
         exit;
 
     } catch (PDOException $e) {
