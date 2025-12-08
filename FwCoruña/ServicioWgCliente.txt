@@ -1,0 +1,15 @@
+#desde el portátil del jefe, inicio sesión como administrador del dominio e inicio wireguard, 
+#exporto la configuración y la guardo en el escritorio, descomprimo y obtengo el archivo Inmobiliaria-movil.conf,
+#que es el nombre de la configuración de la conexción VPN que le dí
+
+#Luego desde PS paro todo los servicios de wireguard
+
+taskkill /IM wireguard.exe /F
+
+
+#Luego creo el servicio, este es un servicio que se ejecuta en segundo plano que inicia automáticamente con el sistema con privilegios Local System
+
+wireguard.exe /installtunnelservice "C:\Users\Ramon\Desktop\Inmobiliaria-movil.conf”
+
+
+#Abro Services y verifico en el listado que se ha creado correctamente y que su condición de inicio es automática.
