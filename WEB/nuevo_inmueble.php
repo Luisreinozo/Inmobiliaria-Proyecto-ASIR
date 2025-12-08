@@ -1,4 +1,6 @@
 <?php
+//root@Web:~# cat /var/www/inmoweb/admin/nuevo_inmueble.php 
+
 require __DIR__ . '/config.php';
 require __DIR__ . '/ldap_empleado.php';
 
@@ -95,90 +97,142 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Nuevo inmueble</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="admin-forms.css">
 </head>
+
 <body>
-<h1>Nuevo inmueble</h1>
-<form method="post">
-    <label>Título:
-        <input type="text" name="titulo" required>
-    </label><br>
 
-    <label>Descripción:<br>
-        <textarea name="descripcion" rows="4" cols="50"></textarea>
-    </label><br>
+    <nav>
+        <ul>
+            <li><a href="index_admin.php" class="active">Inmuebles</a></li>
+            <li><a href="nuevo_cliente.php">Nuevo Cliente</a></li>
+            <li><a href="nuevo_inmueble.php">Nuevo Inmueble</a></li>
+        </ul>
+    </nav>
 
-    <label>Zona:
-        <input type="text" name="zona" required>
-    </label><br>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Nuevo inmueble</h1>
+            </div>
 
-    <label>Tipo de inmueble:
-        <select name="id_tipo" required>
-            <option value="">-- Selecciona --</option>
-            <?php foreach ($tipos as $t): ?>
-                <option value="<?= (int)$t['id_tipo'] ?>"><?= htmlspecialchars($t['tipo']) ?></option>
-            <?php endforeach; ?>
-        </select>
-    </label><br>
+            <form method="post">
 
-    <label>Metros:
-        <input type="number" step="0.01" name="metros" required>
-    </label><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Título:</span>
+                        <input type="text" name="titulo" required>
+                    </label>
+                    <label class="required">
+                        <span>Zona:</span>
+                        <input type="text" name="zona" required>
+                    </label>
+                </div>
 
-    <label>Precio PVP:
-        <input type="number" step="0.01" name="pvp" required>
-    </label><br>
+                <label>
+                    <span>Descripción:</span>
+                    <textarea name="descripcion" rows="4"></textarea>
+                </label>
 
-    <label>Dormitorios:
-        <input type="number" name="dormitorios" min="0" value="0" required>
-    </label><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Tipo de inmueble:</span>
+                        <select name="id_tipo" required>
+                            <option value="">-- Selecciona --</option>
+                            <?php foreach ($tipos as $t): ?>
+                                <option value="<?= (int)$t['id_tipo'] ?>"><?= htmlspecialchars($t['tipo']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                    <label class="required">
+                        <span>Operación:</span>
+                        <select name="id_operacion" required>
+                            <option value="">-- Selecciona --</option>
+                            <?php foreach ($operaciones as $op): ?>
+                                <option value="<?= (int)$op['id_operaciones'] ?>">
+                                    <?= htmlspecialchars($op['operacion']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                </div>
 
-    <label>Baños:
-        <input type="number" name="banos" min="1" required>
-    </label><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Metros cuadrados:</span>
+                        <input type="number" step="0.01" name="metros" required>
+                    </label>
+                    <label class="required">
+                        <span>Precio PVP:</span>
+                        <input type="number" step="0.01" name="pvp" required>
+                    </label>
+                </div>
 
-    <label><input type="checkbox" name="garaje"> Garaje</label><br>
-    <label><input type="checkbox" name="ascensor"> Ascensor</label><br>
-    <label><input type="checkbox" name="trastero"> Trastero</label><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Dormitorios:</span>
+                        <input type="number" name="dormitorios" min="0" value="0" required>
+                    </label>
+                    <label class="required">
+                        <span>Baños:</span>
+                        <input type="number" name="banos" min="1" required>
+                    </label>
+                </div>
 
-    <label><input type="checkbox" name="publicado" checked> Publicado en web</label><br><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Propietario:</span>
+                        <select name="id_propietario" required>
+                            <option value="">-- Selecciona --</option>
+                            <?php foreach ($clientes as $c): ?>
+                                <option value="<?= (int)$c['id_cliente'] ?>">
+                                    <?= htmlspecialchars($c['nombre'] . ' ' . $c['apellido1']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                    <label class="required">
+                        <span>Localidad:</span>
+                        <select name="id_localidad" required>
+                            <option value="">-- Selecciona --</option>
+                            <?php foreach ($localidades as $loc): ?>
+                                <option value="<?= (int)$loc['id_localidades'] ?>">
+                                    <?= htmlspecialchars($loc['localidad']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                </div>
 
-    <label>Propietario:
-        <select name="id_propietario" required>
-            <option value="">-- Selecciona --</option>
-            <?php foreach ($clientes as $c): ?>
-                <option value="<?= (int)$c['id_cliente'] ?>">
-                    <?= htmlspecialchars($c['nombre'] . ' ' . $c['apellido1']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </label><br>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Características:</label>
+                        <div>
+                            <label class="checkbox-inline"><input type="checkbox" name="garaje"> Garaje</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="ascensor"> Ascensor</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Opciones:</label>
+                        <div>
+                            <label class="checkbox-inline"><input type="checkbox" name="trastero"> Trastero</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="publicado" checked> Publicado en web</label>
+                        </div>
+                    </div>
+                </div>
 
-    <label>Localidad:
-        <select name="id_localidad" required>
-            <option value="">-- Selecciona --</option>
-            <?php foreach ($localidades as $loc): ?>
-                <option value="<?= (int)$loc['id_localidades'] ?>">
-                    <?= htmlspecialchars($loc['localidad']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </label><br>
-
-    <label>Operación:
-        <select name="id_operacion" required>
-            <option value="">-- Selecciona --</option>
-            <?php foreach ($operaciones as $op): ?>
-                <option value="<?= (int)$op['id_operaciones'] ?>">
-                    <?= htmlspecialchars($op['operacion']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </label><br><br>
-
-    <button type="submit">Guardar inmueble</button>
-</form>
+                <div class="form-actions">
+                    <button type="submit">Guardar inmueble</button>
+                    <a href="index.php" class="btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
