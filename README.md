@@ -10,5 +10,6 @@ repositorio de scripts del proyecto de ASIR, la intensión es diseñar e impleme
 - **PAR**: diseño de la topología de red, direccionamiento y configuración de dispositivos de interconexión.
 - **EIE**: elaboración de presupuesto, documentación técnica y justificación económica del proyecto.
 
-- <img width="792" height="528" alt="image" src="https://github.com/user-attachments/assets/53e600fe-858d-4086-bff1-a1e439e09af4" />
+<img width="791" height="528" alt="red drawio3" src="https://github.com/user-attachments/assets/70dbce5a-4367-4033-acde-d4b528b1d7f0" />
+
 
