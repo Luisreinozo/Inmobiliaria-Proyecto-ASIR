@@ -35,7 +35,7 @@ $inmuebles = $pdo->query($sql)->fetchAll();
             <li><a href="https://inmocentro.es/vender-casa/">Vender Casa</a></li>
             <li><a href="https://inmocentro.es/trabajo/">Trabaja con Nosotros</a></li>
             <li><a href="https://inmocentro.es/contacto/">Contacto</a></li>
-            <li><a href="admin/index.php" class="admin-link">Login</a></li>
+            <li><a href="admin/index_admin.php" class="admin-link">Login</a></li>
         </ul>
     </nav>
 
