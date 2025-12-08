@@ -1,4 +1,5 @@
 <?php
+// root@Web:~# cat /var/www/inmoweb/admin/config.php
 // conexión que utilizo para otros scripts
 
 $dbHost = '10.0.2.22';
