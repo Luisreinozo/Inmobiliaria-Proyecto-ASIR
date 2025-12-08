@@ -1,4 +1,6 @@
 <?php
+//root@Web:~# cat /var/www/inmoweb/admin/nuevo_cliente.php 
+
 require __DIR__ . '/config.php';
 require __DIR__ . '/ldap_empleado.php';
 
@@ -52,53 +54,101 @@ $localidades = $pdo->query("
 ?>
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Nuevo cliente</title>
 </head>
+
 <body>
-<h1>Nuevo cliente</h1>
-<form method="post">
-    <label>Nombre:
-        <input type="text" name="nombre" required>
-    </label><br>
 
-    <label>Primer apellido:
-        <input type="text" name="apellido1" required>
-    </label><br>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="admin-forms.css">
 
-    <label>Segundo apellido:
-        <input type="text" name="apellido2">
-    </label><br>
+    <nav>
+        <ul>
+            <li><a href="index_admin.php" class="active">Inmuebles</a></li>
+            <li><a href="nuevo_cliente.php">Nuevo Cliente</a></li>
+            <li><a href="nuevo_inmueble.php">Nuevo Inmueble</a></li>
+        </ul>
+    </nav>
 
-    <label>NIF:
-        <input type="text" name="nif" required>
-    </label><br>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Nuevo cliente</h1>
+            </div>
 
-    <label>Teléfono:
-        <input type="text" name="telefono" required>
-    </label><br>
+            <form method="post">
 
-    <label>Email:
-        <input type="email" name="email" required>
-    </label><br>
 
-    <label>Dirección:
-        <input type="text" name="direccion" required>
-    </label><br>
+                <div class="form-row">
+                    <label class="required">
+                        <span>Nombre:</span>
+                        <input type="text" name="nombre" required>
+                    </label>
+                    <label class="required">
+                        <span>Primer apellido:</span>
+                        <input type="text" name="apellido1" required>
+                    </label>
+                </div>
 
-    <label>Localidad:
-        <select name="localidad_id" required>
-            <option value="">-- Selecciona --</option>
-            <?php foreach ($localidades as $loc): ?>
-                <option value="<?= (int)$loc['id_localidades'] ?>">
-                    <?= htmlspecialchars($loc['localidad']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </label><br><br>
 
-    <button type="submit">Guardar cliente</button>
-</form>
+
+                <div class="form-row">
+                    <label>
+                        <span>Segundo apellido:</span>
+                        <input type="text" name="apellido2">
+                    </label>
+                    <label class="required">
+                        <span>NIF:</span>
+                        <input type="text" name="nif" required>
+                    </label>
+                </div>
+
+
+
+                <div class="form-row">
+                    <label class="required">
+                        <span>Teléfono:</span>
+                        <input type="text" name="telefono" required>
+                    </label>
+                    <label class="required">
+                        <span>Email:</span>
+                        <input type="email" name="email" required>
+                    </label>
+                </div>
+
+
+
+                <label class="required">
+                    <span>Dirección:</span>
+                    <input type="text" name="direccion" required>
+                </label>
+
+
+                <label class="required">
+                    <span>Localidad:<span>
+                            <select name="localidad_id" required>
+                                <option value="">-- Selecciona una localidad --</option>
+                                <?php foreach ($localidades as $loc): ?>
+                                    <option value="<?= (int)$loc['id_localidades'] ?>">
+                                        <?= htmlspecialchars($loc['localidad']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                </label><br>
+
+
+
+                <div class="form-actions">
+                    <button type="submit">Guardar cliente</button>
+                    <a href="index_admin.php" class="btn-secondary">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
