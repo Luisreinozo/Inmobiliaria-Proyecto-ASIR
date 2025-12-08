@@ -29,16 +29,16 @@ $inmuebles = $pdo->query($sql)->fetchAll();
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <!-- Barra de menú -->
+
     <nav>
         <ul>
-            <li><a href="index.php" class="active">Inmuebles</a></li>
+            <li><a href="index_admin.php" class="active">Inmuebles</a></li>
             <li><a href="nuevo_cliente.php">Nuevo Cliente</a></li>
             <li><a href="nuevo_inmueble.php">Nuevo Inmueble</a></li>
         </ul>
     </nav>
 
-    <!-- Contenido principal -->
+
     <div class="container">
         <h1>Inmuebles disponibles</h1>
         
