@@ -1,0 +1,107 @@
+/* root@Web:~# cat /var/www/inmoweb/styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Barra de menu*/
+nav {
+    background-color: #white;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+nav ul li a:hover {
+    color: #34495e;
+}
+
+nav ul li a.active {
+    color: #3498db;
+}
+
+/* Estilo especial para el enlace de administración */
+nav ul li a.admin-link {
+    background-color: #E2E7EC;
+    margin-left: auto;
+}
+
+nav ul li a.admin-link:hover {
+    background-color: #C8D0DB;
+}
+
+/* Contenido principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+ul.inmuebles-list {
+    list-style: none;
+}
+
+ul.inmuebles-list li {
+    background: #f8f9fa;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #3498db;
+}
+
+ul.inmuebles-list li a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul.inmuebles-list li a:hover {
+    text-decoration: underline;
+}
+
+.precio {
+    color: #0971A6;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        width: 100%;
+    }
+}
