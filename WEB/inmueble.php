@@ -72,6 +72,16 @@ $fotos = $stmtFotos->fetchAll();
 
 <body>
 
+    <nav>
+        <ul>
+            <li><a href="index.php" class="active">Inmuebles</a></li>
+            <li><a href="https://inmocentro.es/vender-casa/">Vender Casa</a></li>
+            <li><a href="https://inmocentro.es/trabajo/">Trabaja con Nosotros</a></li>
+            <li><a href="https://inmocentro.es/contacto/">Contacto</a></li>
+            <li><a href="admin/index_admin.php" class="admin-link">Login</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
 
         <h1><?= htmlspecialchars($inmueble['titulo']) ?></h1>
