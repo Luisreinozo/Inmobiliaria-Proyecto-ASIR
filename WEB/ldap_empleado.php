@@ -1,5 +1,5 @@
 <?php
-
+//root@Web:~# cat /var/www/inmoweb/admin/ldap_empleado.php 
 //Obtener el sAMAccountName del usuario autenticado por Apache/LDAP
 $nombreUsuarioAD = $_SERVER['REMOTE_USER'] ?? null;
 
